@@ -7,9 +7,6 @@ export const tabs: AppTab[] = [
     { name: "settings", title: "Settings", icon: icons.setting },
 ];
 
-export const HOME_USER = {
-    name: "Adrian | JS Mastery",
-};
 
 export const HOME_BALANCE = {
     amount: 2489.48,
