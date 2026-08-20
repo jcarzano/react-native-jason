@@ -3,19 +3,27 @@ import React from "react";
 import { formatCurrency } from "@/lib/utils";
 
 const UpcomingSubsriptionCard = ({
-  data: { name, price, daysLeft, icon, currency },
+  name,
+  price,
+  daysLeft,
+  icon,
+  currency,
 }: UpcomingSubscription) => {
   return (
-    <View className="upcoming-card">
+    <View className="mr-4 w-44 rounded-2xl border border-black/10 bg-background p-4">
       <View className="upcoming-row">
         <Image source={icon} className="upcoming-icon" />
         <View>
           <Text className="upcoming-price">
             {formatCurrency(price, currency)}
           </Text>
-          <Text className="upcoming-meta">{daysLeft}</Text>
+          <Text className="upcoming-meta" numberOfLines={1}>
+            {daysLeft > 1 ? `${daysLeft} days left` : "Last day"}
+          </Text>
         </View>
       </View>
+
+      <Text numberOfLines={1}>{name}</Text>
     </View>
   );
 };
