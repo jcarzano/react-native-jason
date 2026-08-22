@@ -8,12 +8,16 @@ import "@/global.css";
 import { formatCurrency } from "@/lib/utils";
 import dayjs from "dayjs";
 import { styled } from "nativewind";
+import { useState } from "react";
 import { Image, View, Text, FlatList } from "react-native";
 import { SafeAreaView as RNSafeReaView } from "react-native-safe-area-context";
 
 const SafeAreaView = styled(RNSafeReaView);
 
 export default function App() {
+  const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
+    string | null
+  >(null);
   return (
     <SafeAreaView className="flex-1 p-5">
       <View className="mb-2 flex-row items-center justify-between">
@@ -50,14 +54,26 @@ export default function App() {
           horizontal
           showsHorizontalScrollIndicator={false}
           ListEmptyComponent={
-            <Text className="home-empty-state">No upcoming renewals yet.</Text>
+            <Text className="py-4 text-sm font-sans-medium text-black/60">
+              No upcoming renewals yet.
+            </Text>
           }
         />
       </View>
 
       <View>
         <ListHeading title="All Subscriptions" />
-        <SubscriptionCard {...HOME_SUBSCRIPTIONS[0]} />
+        <SubscriptionCard
+          {...HOME_SUBSCRIPTIONS[0]}
+          expanded={expandedSubscriptionId === HOME_SUBSCRIPTIONS[0].id}
+          onPress={() =>
+            setExpandedSubscriptionId((currentId) =>
+              currentId === HOME_SUBSCRIPTIONS[0].id
+                ? null
+                : HOME_SUBSCRIPTIONS[0].id,
+            )
+          }
+        />
       </View>
     </SafeAreaView>
   );
